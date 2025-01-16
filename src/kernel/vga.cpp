@@ -33,7 +33,7 @@ void clear(void){
 }
 
 
-void raw_print(const char msg[], int x, int y, enum vga_color text_color = WHITE, enum vga_color font_color = BLACK){
+void raw_print(const char msg[], int x, int y, vga_color text_color = WHITE, vga_color font_color = BLACK){
     volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
 
     for(int i = 0; msg[i] != 0; i++){
