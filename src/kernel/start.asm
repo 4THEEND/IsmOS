@@ -10,9 +10,9 @@ section .text
 
  _start:
 
-    mov esp, stack_top
+    mov rsp, stack_top
 
-    call kmain  
+    ;call kmain  
 
     cli         ; clear interrupts 
     .halt :     ; enter infinite loop to block pc
