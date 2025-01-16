@@ -3,10 +3,13 @@
 extern "C" {
 
 void kmain(void){
-    clear(); 
+    clear_screen(); 
 
     raw_print("coucou", 1, 1, GREEN, BLACK);
-    raw_print("salut", 1, 2);
+
+    scroll();
+
+    raw_print("salut", 1, 3);
     
 }
 

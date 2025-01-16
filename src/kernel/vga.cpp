@@ -24,7 +24,7 @@ enum vga_color {
 
 
 
-void clear(void){
+void clear_screen(void){
     volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
     for (int i = 0; i < VGA_COLUMNS_NUM * VGA_ROWS_NUM * 2; i++){
         vga_buf[i * 2] = '\0';
@@ -33,11 +33,25 @@ void clear(void){
 }
 
 
+void raw_print_character(char character, int x, int y, vga_color text_color = WHITE, vga_color font_color = BLACK){
+        volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
+
+        vga_buf[2 * (y * VGA_COLUMNS_NUM + x) ] = character;
+        vga_buf[2 * (y * VGA_COLUMNS_NUM + x) + 1] = (font_color << 4 | text_color); // first 4 bits is the foreground color
+}
+
+
+void scroll(int n = 1){
+
+}
+
+
 void raw_print(const char msg[], int x, int y, vga_color text_color = WHITE, vga_color font_color = BLACK){
-    volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
+    // verify if it does not overflow memory scroll if it's the case
 
     for(int i = 0; msg[i] != 0; i++){
-        vga_buf[2 * (i + y * VGA_COLUMNS_NUM + x) ] = msg[i];
-        vga_buf[2 * (i + y * VGA_COLUMNS_NUM + x) + 1] = (font_color << 4 | text_color); // first 4 bits is the foreground color
+        raw_print_character(msg[i], x + i, y, text_color, font_color);
     }
 }
+
+
