@@ -11,7 +11,7 @@ CC   = x86_64-elf-gcc
 CPP  = x86_64-elf-g++
 
 LDFLAGS = -nostdlib -lgcc -mno-red-zone
-CCFLAGS = -ffreestanding -g -mno-red-zone -mno-mmx -mno-sse -mno-sse2
+CCFLAGS = -ffreestanding -g -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -fno-rtti -fno-exceptions
 
 BOOT_BINS   = boot.bin stage2.bin
 KERNEL_OBJS = start.o kernel.o
