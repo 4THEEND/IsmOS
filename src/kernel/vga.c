@@ -6,7 +6,7 @@
 
 
 void clear(void){
-    volatile char* vga_buf = (volatile char*)0xb8000;
+    volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
     for (int i = 0; i < VGA_COLUMNS_NUM * VGA_ROWS_NUM * 2; i++){
         vga_buf[i * 2] = '\0';
         vga_buf[i * 2 + 1] = 0x00;
@@ -14,6 +14,10 @@ void clear(void){
 }
 
 
-void raw_print(void){
-    
+void raw_print(const char msg[]){
+    volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
+    for(int i = 0; i < ARRAY_SIZE(msg); i++){
+        vga_buf[2 * i] = msg[i];
+        vga_buf[2 * i + 1] = 0x07;
+    }
 }

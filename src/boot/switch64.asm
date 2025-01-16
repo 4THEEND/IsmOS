@@ -226,7 +226,7 @@ long_mode_not_supported:
 
 load_gdt:
     cli
-    lgdt [GDT_DESCRIPTOR]
+    lgdt [GDT_DESCRIPTOR_64]
 
     jmp CODE_SGT_64:kernel_go_brrrr
 

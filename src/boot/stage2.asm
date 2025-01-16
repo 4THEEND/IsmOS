@@ -55,7 +55,7 @@ kernel_go_brrrr:
     mov ebx, sucess_enter_compatibility
     call print_string64
     
-    call KERNEL_OFFSET ; ERROR There
+    call KERNEL_OFFSET
     jmp $
 
 

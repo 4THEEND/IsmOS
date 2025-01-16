@@ -59,7 +59,6 @@ a20_fail_m db "Failed to enable A20 line via BIOS functions", 0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; GDT32 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
 null_sgt:
     dq 0x0            ; 8 null bytes
 code_sgt_gdt:
