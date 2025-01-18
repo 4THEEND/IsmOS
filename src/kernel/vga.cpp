@@ -23,12 +23,11 @@ enum vga_color {
 };
 
 
-
 void clear_screen(void){
     volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
     for (int i = 0; i < VGA_COLUMNS_NUM * VGA_ROWS_NUM * 2; i++){
-        vga_buf[i * 2] = '\0';
-        vga_buf[i * 2 + 1] = 0x00;
+        vga_buf[2 * i] = '\0';
+        vga_buf[2 * i + 1] = 0x00;
     }
 }
 
@@ -44,23 +43,31 @@ void raw_print_character(char character, int x, int y, vga_color text_color = WH
 void scroll(int n = 1){
     volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
 
-    for(int i = 0; i < 2 * VGA_COLUMNS_NUM * n; i++){
-        vga_buf[i * 2] = vga_buf[(i + n * VGA_COLUMNS_NUM) * 2];
-        vga_buf[i * 2 + 1] = vga_buf[(i + n * VGA_COLUMNS_NUM) * 2 + 1];
+    for(int i = 0; i < 2 * VGA_COLUMNS_NUM * (VGA_ROWS_NUM - n); i++){
+        vga_buf[2 * i] = vga_buf[(i + n * VGA_COLUMNS_NUM) * 2];
+        vga_buf[2 * i + 1] = vga_buf[(i + n * VGA_COLUMNS_NUM) * 2 + 1];
     }
 
     for(int i = 2 * (VGA_COLUMNS_NUM * VGA_ROWS_NUM - VGA_COLUMNS_NUM * n); i < VGA_COLUMNS_NUM * VGA_ROWS_NUM * 2; i++){
-        vga_buf[i * 2] = '\0';
-        vga_buf[i * 2 + 1] = 0x00;
+        vga_buf[2 * i] = '\0';
+        vga_buf[2 * i + 1] = 0x00;
     }
 }
 
 
 void raw_print(const char msg[], int x, int y, vga_color text_color = WHITE, vga_color font_color = BLACK){
-    // verify if it does not overflow memory scroll if it's the case
-
     for(int i = 0; msg[i] != 0; i++){
-        raw_print_character(msg[i], x + i, y, text_color, font_color);
+        if(x > VGA_COLUMNS_NUM - 1){
+            x = 0;
+            y++;
+        }
+        if(y > VGA_ROWS_NUM - 1){
+            scroll(y - VGA_ROWS_NUM + 1);
+            y = VGA_ROWS_NUM - 1;
+        }
+        
+        raw_print_character(msg[i], x, y, text_color, font_color);
+        x++;
     }
 }
 
