@@ -1,10 +1,6 @@
 extern "C" {
 
-__attribute__((noreturn))
-void interrupt_handler(void);
-
-
-void interrupt_handler(){
+void interrupt_handler(void){
     asm __volatile__("cli; hlt");
 }
 

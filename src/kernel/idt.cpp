@@ -28,7 +28,7 @@ static idtr_t idtr;
 extern uint64 isr_table[];
 
 void fill_idt(void){
-    for(int i = 0; i < IDT_LENGTH; i++){
+    for(int i = 0; i < 32; i++){
         idt[i].offset1 = isr_table[i] & 0xFFFF;
         idt[i].segment_selector = 0x08;
         idt[i].ist = 0;
