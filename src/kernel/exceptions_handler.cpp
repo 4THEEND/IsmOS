@@ -1,6 +1,6 @@
 extern "C" {
 
-void interrupt_handler(void){
+void exception_handler(void){
     asm __volatile__("cli; hlt");
 }
 

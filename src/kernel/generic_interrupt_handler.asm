@@ -1,10 +1,10 @@
-extern interrupt_handler
+extern exception_handler
 
 %macro link_interrupt_err 1
 isr_%+ %1:
     cli
     push %1
-    call interrupt_handler
+    call exception_handler
     iretq
 %endmacro
 
@@ -13,7 +13,7 @@ isr_%+ %1:
     cli
     push 0
     push %1
-    call interrupt_handler
+    call exception_handler
     iretq
 %endmacro
 

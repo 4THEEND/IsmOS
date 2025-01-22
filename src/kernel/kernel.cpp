@@ -5,7 +5,7 @@ extern "C" {
 
 void kmain(void){
     init_idt();
-    
+
     clear_screen(); 
 
     raw_print("coucou", 1, 2, GREEN, BLACK);
