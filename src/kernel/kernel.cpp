@@ -1,10 +1,12 @@
 #include "vga.cpp"
 #include "idt.cpp"
+#include "apic.cpp"
 
 extern "C" {
 
 void kmain(void){
     init_idt();
+    init_apic();
 
     clear_screen(); 
 
