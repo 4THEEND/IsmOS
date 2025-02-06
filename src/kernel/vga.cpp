@@ -1,3 +1,5 @@
+#pragma once
+
 #define VGA_COLUMNS_NUM 80
 #define VGA_ROWS_NUM 25
 #define VGA_MEMORY_ADRESS 0xB8000

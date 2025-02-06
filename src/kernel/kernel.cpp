@@ -1,14 +1,13 @@
-#include "vga.cpp"
 #include "idt.cpp"
 #include "apic.cpp"
 
 extern "C" {
 
 void kmain(void){
+    clear_screen(); 
+
     init_idt();
     init_apic();
-
-    clear_screen(); 
 
     raw_print("coucou", 1, 2, GREEN, BLACK);
     scroll();
