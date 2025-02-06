@@ -2,11 +2,14 @@
 
 #include "vga.cpp"
 #include "types.hpp"
+#include "exceptions_handler.cpp"
 
 
 bool check_apic(void){
-    asm __volatile__("movl $1, %eax");
-    asm __volatile__("cpuid");
+    asm __volatile__(
+        "movl $1, %eax;"
+        "cpuid"
+    );
 
     uint32 edx = 0;
     asm __volatile__("movl %%edx, %0" : "=r" (edx) : );
@@ -16,8 +19,7 @@ bool check_apic(void){
 
 void init_apic(void){
     if(!check_apic()){
-        raw_print("APIC not supported !!!", 0, 0, WHITE, RED);
-        asm __volatile__("cli;hlt");
+        kernel_panic("APIC not supported !!!");
     }
 
     raw_print("APIC supported !!!", 0, 0);

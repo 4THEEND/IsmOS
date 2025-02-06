@@ -14,7 +14,7 @@ LDFLAGS = -nostdlib -lgcc -mno-red-zone
 CCFLAGS = -ffreestanding -g -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -fno-rtti -fno-exceptions 
 
 BOOT_BINS   = boot.bin stage2.bin
-KERNEL_OBJS = start.o exceptions_handler.o generic_interrupt_handler.o kernel.o
+KERNEL_OBJS = start.o generic_interrupt_handler.o kernel.o
 
 all : $(OS_NAME).bin
 
