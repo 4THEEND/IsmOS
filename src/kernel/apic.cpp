@@ -1,14 +1,15 @@
 #pragma once
+
 #include "vga.cpp"
 #include "types.hpp"
 
 
 bool check_apic(void){
-    asm __volatile__("mov $1, %eax");
+    asm __volatile__("movl $1, %eax");
     asm __volatile__("cpuid");
 
     uint32 edx = 0;
-    asm __volatile__("mov %%edx, %0" : "=r" (edx) : );
+    asm __volatile__("movl %%edx, %0" : "=r" (edx) : );
     return edx & (1 << 9) != 0;
 }
 

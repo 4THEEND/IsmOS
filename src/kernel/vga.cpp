@@ -34,7 +34,7 @@ void clear_screen(void){
 }
 
 
-void raw_print_character(char character, int x, int y, vga_color text_color = WHITE, vga_color font_color = BLACK){
+void raw_print_character(const char character, int x, int y, vga_color text_color = WHITE, vga_color font_color = BLACK){
     volatile char* vga_buf = (volatile char*)VGA_MEMORY_ADRESS;
 
     vga_buf[2 * (y * VGA_COLUMNS_NUM + x) ] = character;
