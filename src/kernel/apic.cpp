@@ -22,6 +22,6 @@ void init_apic(void){
         kernel_panic("APIC not supported !!!");
     }
 
-    raw_print("APIC supported !!!", 0, 0);
+    kernel_info("APIC supported !!!");
     asm __volatile__("cli;hlt");
 }
