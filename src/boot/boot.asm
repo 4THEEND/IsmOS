@@ -23,6 +23,7 @@
 ;
 ;   This construction is safer than putting than putting the stack after the bootloader because the stack
 ;   grows downward.
+;   A new stack is reserved in start.asm and is 16 bytes aligned to call c code
 
 STAGE2_OFFSET equ 0x7e00
 
