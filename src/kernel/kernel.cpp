@@ -1,5 +1,5 @@
 #include "idt.cpp"
-#include "apic.cpp"
+#include "pic.cpp"
 
 extern "C" {
 
@@ -7,7 +7,7 @@ void kmain(void){
     clear_screen(); 
 
     init_idt();
-    init_apic();
+    init_pic();
 
     raw_print("coucou", 1, 2, GREEN, BLACK);
     scroll();

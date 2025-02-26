@@ -17,9 +17,9 @@ bool check_apic(void){
 }
 
 
-void init_apic(void){
+void init_pic(void){
     if(!check_apic()){
-        kernel_panic("APIC not supported !!!");
+        kernel_info("APIC not supported !!!");
     }
 
     kernel_info("APIC supported !!!");
